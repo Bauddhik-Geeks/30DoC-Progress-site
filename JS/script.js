@@ -81,7 +81,7 @@ submitForm.onclick = function(e) {
                                             });
 
                                             if (Date.now() < Date.now() + 15000) {
-                                                if (i < 40) {
+                                                if (i < 30) {
                                                     requestAnimationFrame(frame1);
                                                     i++;
                                                 }
@@ -121,7 +121,7 @@ submitForm.onclick = function(e) {
                                             });
 
                                             if (Date.now() < Date.now() + 15000) {
-                                                if (i < 40) {
+                                                if (i < 30) {
                                                     requestAnimationFrame(frame2);
                                                     i++;
                                                 }
