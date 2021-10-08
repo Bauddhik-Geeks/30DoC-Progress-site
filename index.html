@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="box">
+        <div id="header">
+            <div style="text-align:center;margin-bottom: 10px;">
+                <img src='Images/DSC-NUST-logo.png' style='width:280px;'>
+            </div>
+            <div class='logo'>
+                <div class='club-name'>
+                    <img src='Images/clubbirla.png' width='100px'>
+                </div>
+                <div>
+                    <span style='font-size:2.6rem'>Developers Student Club</span><br>
+                    <span style='font-size:1.4rem'>Birla Institute of Technology, Mesra</span>
+                </div>
+            </div>
+        </div>
+        <div id="form-div">
+            <div style="text-align:center;margin-bottom:15px;font-size: 1.5rem;margin-left:40px">
+                <span style='color:#e94234;'>Check</span>
+                <span style='color:#4184f3;'>Your</span>
+                <span style='color: #0e9c57;'>Progress</span>
+                <span style='color: #fabb04;'>Here</span> 👇
+            </div>
+            <div><input type="email" name="email" id='input_email' placeholder="Enter your email address" required></div>
+            <div><input type='submit' name="submit" value="Submit" id="submit_form" /></div>
+
+        </div>
+
+        <div id="details-show">
+
+
+            <div class='name'>
+                <div>Name</div>
+                <div id='user-name'></div>
+            </div>
+
+            <div class='name'>
+                <div>Email</div>
+                <div id='user-email'></div>
+            </div>
+
+            <div id="about-track">
+                <div class="track">
+                    <div>Track 1</div>
+                    <div class='track-show'>
+                        <div id='progress-1'>
+                            <div id='progress-complete-1'></div>
+                        </div>
+                        <div id='count1'>6/6 Quest Completed 🎉🎉</div>
+                    </div>
+                </div>
+
+                <div class="track">
+                    <div>Track 2</div>
+                    <div class='track-show'>
+                        <div id='progress-2'>
+                            <div id='progress-complete-2'></div>
+                        </div>
+                        <div id='count2'>6/6 Quest Completed 🎉🎉</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id='rocket'>
+        <div id='rocket-part'>
+            <img src='Images/rocket.png' alt='rocket'>
+        </div>
+    </div>
+
+    <div class='footer_bottom'>
+        Developed by Team <a href="https://bauddhikgeeks.tech/">Bauddhik Geeks</a>
+    </div>
+    <script>
+        var submitForm = document.getElementById('submit_form');
+        var userName = document.getElementById('user-name');
+        var userEmail = document.getElementById('user-email');
+        var Track1 = document.getElementById('progress-complete-1');
+        var Track2 = document.getElementById('progress-complete-2');
+        var count1 = document.getElementById('count1');
+        var count2 = document.getElementById('count2');
+
+
+        submitForm.onclick = function(e) {
+            e.preventDefault();
+            var rocket = document.getElementById('rocket');
+            var inputEmail = document.getElementById('input_email');
+            if (inputEmail.value == '') {
+                /* alert('Please enter your email address'); */
+            } else {
+                /* alert('Great'); */
+
+                if (!rocket.classList.contains('rocketlaunch')) {
+                    rocket.classList.add('rocketlaunch');
+                    rocket.style.opacity = '1';
+                    rocket.style.visibility = 'visible';
+
+                    setTimeout(function() {
+                        rocket.style.opacity = '0';
+                        rocket.style.visibility = 'hidden';
+                        console.log(inputEmail.value);
+
+                        const options = {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                email: inputEmail.value
+                            }),
+                        };
+                        fetch('https://bit-bauddhik-geeks.herokuapp.com/find-Data', options)
+                            .then(data => {
+                                if (!data.ok) {
+                                    throw Error(data.status);
+                                }
+                                return data.json();
+                            }).then(update => {
+                                console.log(update);
+
+                                console.log(typeof update);
+                                console.log(update['email']);
+                                if (update['message'] == inputEmail.value) {
+                                    document.getElementById('details-show').style.display = 'block';
+                                    userName.innerText = update['name'];
+                                    userEmail.innerText = update['email'];
+                                    let calcu1 = (update['track1'] / 6) * 100 + 5;
+                                    let calcu2 = (update['track2'] / 6) * 100 + 5;
+                                    Track1.style.width = calcu1 + '%';
+                                    Track2.style.width = calcu2 + '%';
+                                    count1.innerText = update['track1'] + '/6 Quest Completed 🎉🎉';
+                                    count2.innerText = update['track2'] + '/6 Quest Completed 🎉🎉';
+                                } else {
+                                    alert('Email not found');
+                                }
+                            }).catch(e => {
+                                console.log(e);
+                            });
+                    }, 1000);
+                    setTimeout(function() {
+
+                        rocket.classList.remove('rocketlaunch');
+                    }, 1500);
+                } else {
+                    /* alert('Please select'); */
+                }
+            }
+
+
+        }
+    </script>
+
+</body>
+
+</html>

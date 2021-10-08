@@ -1,0 +1,240 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-1: #fff;
+    --color-2: #000;
+    --color-3: #333;
+    --color-4: #ccc;
+    --primary-color: #fbbd18;
+    --background-color: #1b1b1b;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+    position: relative;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+#header {
+    font-size: 2rem;
+    color: var(--color-1);
+    margin-block: 20px;
+}
+
+.logo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.club-name {
+    position: relative;
+    top: -20px;
+}
+
+#form-div {
+    text-align: center;
+    width: 100%;
+}
+
+#form-div div {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#form-div div input {
+    width: 80%;
+    height: 40px;
+    text-indent: 10px;
+    border: 0;
+    outline: none;
+    border-radius: 6px;
+    margin-left: 60px;
+}
+
+#form-div input[type="submit"] {
+    text-indent: 0;
+    border: 0;
+    outline: none;
+    width: 10em;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+#form-div input[type="submit"]:hover {
+    background-color: var(--primary-color);
+}
+
+#rocket {
+    position: absolute;
+    bottom: 60px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.2s ease-in-out;
+    z-index: 100;
+}
+
+#rocket.rocketlaunch {
+    animation: rocketLaunch 2s ease forwards;
+}
+
+#rocket-part {
+    position: relative;
+    text-align: center;
+}
+
+#rocket-part::before {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 80px;
+    background: linear-gradient(var(--primary-color), transparent);
+    bottom: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+@keyframes rocketLaunch {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-120vh);
+    }
+}
+
+#details-show {
+    color: var(--color-1);
+    display: none;
+}
+
+.name {
+    font-size: 25px;
+    margin: 20px 0px;
+}
+
+#user-name,
+#user-email {
+    color: var(--primary-color);
+}
+
+#user-name {
+    text-transform: capitalize;
+}
+
+#about-track {
+    margin-block: 2em;
+}
+
+.track {
+    margin: 20px 0;
+    font-size: 1.3rem;
+}
+
+.track-show {
+    display: flex;
+    gap: 0.4em;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+#progress-1,
+#progress-2 {
+    text-align: center;
+    margin-top: 20px;
+    min-width: 400px;
+    height: 30px;
+    border-radius: 50px;
+    background-color: var(--color-4);
+    position: relative;
+    overflow: hidden;
+}
+
+#progress-complete-1,
+#progress-complete-2 {
+    width: 0;
+    background-color: var(--primary-color);
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+#progress-complete-1::before,
+#progress-complete-2::before {
+    position: absolute;
+    content: " ";
+    width: 20px;
+    height: 150%;
+    background-color: var(--color-4);
+    right: -4px;
+    transform: rotate(30deg);
+}
+
+#count1,
+#count2 {
+    position: relative;
+    top: 21px;
+}
+
+.footer_bottom {
+    position: absolute;
+    bottom: 0;
+    color: var(--color-1);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.footer_bottom a {
+    color: inherit;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    .logo {
+        justify-content: center;
+    }
+    .club-name {
+        top: -20px;
+    }
+    .club-name img {
+        width: 80px !important;
+    }
+    .logo div:nth-child(2) {
+        text-align: center;
+    }
+    .logo div:nth-child(2) span:nth-child(1) {
+        font-size: 1.8rem !important;
+    }
+    .logo div:nth-child(2) span:nth-child(3) {
+        font-size: 1.2rem !important;
+    }
+    #form-div div input {
+        margin-left: auto;
+    }
+}
+
+@media screen and (max-width: 408px) {
+    .club-name {
+        top: 20px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .logo div:nth-child(2) span:nth-child(1) {
+        font-size: 1.6rem !important;
+    }
+    .logo div:nth-child(2) span:nth-child(3) {
+        font-size: 1rem !important;
+    }
+}
