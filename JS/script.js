@@ -59,6 +59,37 @@ submitForm.onclick = function(e) {
                                     i++;
                                 } else {
                                     clearInterval(trackAnimation1);
+                                    if (update['track1'] == 6) {
+                                        var colors = ["#8b5642", "#6a696b"];
+
+                                        let i = 0;
+
+                                        function frame1() {
+                                            confetti({
+                                                particleCount: 2,
+                                                angle: 60,
+                                                spread: 55,
+                                                origin: { x: 0 },
+                                                colors: colors,
+                                            });
+                                            confetti({
+                                                particleCount: 2,
+                                                angle: 120,
+                                                spread: 55,
+                                                origin: { x: 1 },
+                                                colors: colors,
+                                            });
+
+                                            if (Date.now() < Date.now() + 15000) {
+                                                if (i < 40) {
+                                                    requestAnimationFrame(frame1);
+                                                    i++;
+                                                }
+
+                                            }
+                                        }
+                                        frame1();
+                                    }
                                 }
                             }, 10);
 
@@ -68,6 +99,36 @@ submitForm.onclick = function(e) {
                                     j++;
                                 } else {
                                     clearInterval(trackAnimation2);
+                                    if (update['track2'] == 6) {
+                                        var colors = ["#8b5642", "#6a696b"];
+
+                                        let i = 0;
+
+                                        function frame2() {
+                                            confetti({
+                                                particleCount: 2,
+                                                angle: 60,
+                                                spread: 55,
+                                                origin: { x: 0 },
+                                                colors: colors,
+                                            });
+                                            confetti({
+                                                particleCount: 2,
+                                                angle: 120,
+                                                spread: 55,
+                                                origin: { x: 1 },
+                                                colors: colors,
+                                            });
+
+                                            if (Date.now() < Date.now() + 15000) {
+                                                if (i < 40) {
+                                                    requestAnimationFrame(frame2);
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                        frame2();
+                                    }
                                 }
                             }, 10);
 
@@ -89,3 +150,36 @@ submitForm.onclick = function(e) {
         }
     }
 }
+
+
+
+
+/* 
+var colors = ["#8b5642", "#6a696b"];
+
+let i = 0;
+
+function frame() {
+    confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: colors,
+    });
+    confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: colors,
+    });
+
+    if (Date.now() < Date.now() + 15000) {
+        if (i < 40) {
+            requestAnimationFrame(frame);
+            i++;
+        }
+
+    }
+} */
