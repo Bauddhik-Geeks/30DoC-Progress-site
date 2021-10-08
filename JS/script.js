@@ -38,7 +38,11 @@ submitForm.onclick = function(e) {
                     fetch('https://bit-bauddhik-geeks.herokuapp.com/find-Data', options)
                         .then(data => {
                             if (!data.ok) {
+                                if (data.status == 400) {
+                                    alert('Email not found');
+                                }
                                 throw Error(data.status);
+
                             }
                             return data.json();
                         }).then(update => {
