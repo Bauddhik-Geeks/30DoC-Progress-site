@@ -15,14 +15,45 @@
 }
 
 body {
-    min-height: 100vh;
+    background-color: var(--background-color);
+    position: relative;
+    font-family: sans-serif;
+}
+
+.main-partner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.partner {
+    color: var(--color-1);
+    padding: 0 20px;
+    font-size: 1.5rem;
+}
+
+.partner img {
+    width: 60px;
+    position: relative;
+    top: 22px;
+    margin-right: 10px;
+}
+
+.partner a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.partner:first-child {
+    color: var(--primary-color);
+}
+
+#box {
+    padding: 0 8px;
+    margin-bottom: 40px;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--background-color);
-    position: relative;
-    overflow: hidden;
-    font-family: sans-serif;
 }
 
 #header {
@@ -45,6 +76,13 @@ body {
 #form-div {
     text-align: center;
     width: 100%;
+}
+
+#check-progress {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    margin-left: 40px;
 }
 
 #form-div div {
@@ -82,7 +120,24 @@ body {
     visibility: hidden;
     transition: 0.2s ease-in-out;
     z-index: 100;
+    left: 50%;
+    transform: translateX(-50%);
 }
+
+
+/* 
+#rocket::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    opacity: 0.3;
+
+
+}
+*/
 
 #rocket.rocketlaunch {
     animation: rocketLaunch 2s ease forwards;
@@ -124,6 +179,11 @@ body {
     margin: 20px 0px;
 }
 
+.description {
+    font-size: 28px;
+    font-weight: 600;
+}
+
 #user-name,
 #user-email {
     color: var(--primary-color);
@@ -153,7 +213,7 @@ body {
 #progress-2 {
     text-align: center;
     margin-top: 20px;
-    min-width: 400px;
+    width: 400px;
     height: 30px;
     border-radius: 50px;
     background-color: var(--color-4);
@@ -184,25 +244,97 @@ body {
 #count1,
 #count2 {
     position: relative;
-    top: 21px;
+    top: 20px;
 }
 
 .footer_bottom {
-    position: absolute;
+    /* position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%; */
     color: var(--color-1);
     font-size: 1.2rem;
-    text-align: center;
+    padding: 0px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.footer_bottom a {
-    color: inherit;
+.footer_design {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.footer_design div {
+    line-height: 2;
+}
+
+.footer_design div a {
     text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease-in-out;
+}
+
+.footer_design div a:hover {
+    color: var(--primary-color);
+}
+
+.footer_design div img {
+    width: 50px;
+    position: relative;
+    top: 18px;
+}
+
+#design {
+    color: var(--primary-color);
+}
+
+@media screen and (max-width: 700px) {
+    #check-progress {
+        margin-left: 0px;
+    }
+    #form-div div input {
+        margin-left: auto;
+    }
+    .name {
+        text-align: center;
+    }
+    .track {
+        text-align: center;
+    }
+    .track-show {
+        display: block;
+        margin-bottom: 40px;
+    }
+    #progress-1,
+    #progress-2 {
+        width: 100% !important;
+        padding: 0 10px !important;
+    }
+    .footer_design {
+        gap: 0px;
+    }
+    #design {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 600px) {
+    .partner {
+        padding: 0 8px;
+        font-size: 0.8rem;
+    }
+    .partner img {
+        width: 40px;
+        top: 16px;
+    }
     .logo {
         justify-content: center;
+        gap: 2px;
     }
     .club-name {
         top: -20px;
@@ -219,8 +351,35 @@ body {
     .logo div:nth-child(2) span:nth-child(3) {
         font-size: 1.2rem !important;
     }
+    #check-progress {
+        margin-left: 0px;
+    }
     #form-div div input {
         margin-left: auto;
+    }
+    .name {
+        text-align: center;
+    }
+    .track {
+        text-align: center;
+    }
+    .track-show {
+        display: block;
+        margin-bottom: 40px;
+    }
+    #progress-1,
+    #progress-2 {
+        width: 90% !important;
+        padding: 0 10px !important;
+        margin: 0 auto !important;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .footer_design>div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
@@ -230,7 +389,10 @@ body {
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 330px) {
+    .partner {
+        padding: 0 5px;
+    }
     .logo div:nth-child(2) span:nth-child(1) {
         font-size: 1.6rem !important;
     }
