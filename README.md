@@ -5,7 +5,12 @@
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
 
 
-**Progress Report Site For 30 days of google cloud**
+<p align="center">
+  <img alt="Sloan, the sloth mascot" width="250px" src="https://user-images.githubusercontent.com/68494604/134782910-ff2a63bb-ac82-4dd7-a9fd-a0a963029342.gif">
+   <br>
+</p>
+
+**Website for checking Progress Report Site For 30 days of google cloud by just one click**
 
 ## Snapshot 💻
 
