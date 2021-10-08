@@ -9,6 +9,7 @@ var count2 = document.getElementById('count2');
 submitForm.onclick = function(e) {
     e.preventDefault();
     var rocket = document.getElementById('rocket');
+    var rocketOverlay = document.getElementById('rocket-overlay');
     var inputEmail = document.getElementById('input_email');
 
     if (inputEmail.value == '') {
@@ -18,12 +19,12 @@ submitForm.onclick = function(e) {
 
         if (!rocket.classList.contains('rocketlaunch')) {
             rocket.classList.add('rocketlaunch');
-            rocket.style.opacity = '1';
-            rocket.style.visibility = 'visible';
+            rocketOverlay.style.opacity = '1';
+            rocketOverlay.style.visibility = 'visible';
 
             setTimeout(function() {
-                rocket.style.opacity = '0';
-                rocket.style.visibility = 'hidden';
+                rocketOverlay.style.opacity = '0';
+                rocketOverlay.style.visibility = 'hidden';
                 console.log(inputEmail.value);
 
                 const options = {
