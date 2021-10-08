@@ -39,14 +39,13 @@ submitForm.onclick = function(e) {
                         .then(data => {
                             if (!data.ok) {
                                 if (data.status == 400) {
-                                    alert('Email not found');
+                                    alert('Data not found! Please check your email again');
                                 }
                                 throw Error(data.status);
 
                             }
                             return data.json();
                         }).then(update => {
-                            //console.log(update);
                             if (update['email'] == inputEmail.value) {
                                 document.getElementById('details-show').style.display = 'block';
                                 userName.innerText = update['name'];
@@ -140,14 +139,12 @@ submitForm.onclick = function(e) {
                                 alert('Email not found');
                             }
                         }).catch(e => {
-                            console.log(e);
                         });
                 }, 1000);
                 setTimeout(function() {
                     rocket.classList.remove('rocketlaunch');
                 }, 1500);
             } else {
-                /* alert('Please select'); */
             }
         } else {
             alert('You have entered an invalid email address!');
