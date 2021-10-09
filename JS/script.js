@@ -50,8 +50,8 @@ submitForm.onclick = function(e) {
                                 document.getElementById('details-show').style.display = 'block';
                                 userName.innerText = update['name'];
                                 userEmail.innerText = update['email'];
-                                let calcu1 = Math.round((update['track1'] / 6) * 100) + 5;
-                                let calcu2 = Math.round((update['track2'] / 6) * 100) + 5;
+                                let calcu1 = Math.round((update['track1'] / 6) * 100) + 15;
+                                let calcu2 = Math.round((update['track2'] / 6) * 100) + 15;
                                 let i = 2;
                                 let j = 2;
 
@@ -138,14 +138,12 @@ submitForm.onclick = function(e) {
                             } else {
                                 alert('Email not found');
                             }
-                        }).catch(e => {
-                        });
+                        }).catch(e => {});
                 }, 1000);
                 setTimeout(function() {
                     rocket.classList.remove('rocketlaunch');
                 }, 1500);
-            } else {
-            }
+            } else {}
         } else {
             alert('You have entered an invalid email address!');
         }
