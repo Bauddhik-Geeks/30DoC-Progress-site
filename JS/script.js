@@ -35,7 +35,7 @@ submitForm.onclick = function(e) {
                             email: inputEmail.value
                         }),
                     };
-                    fetch('https://bit-bauddhik-geeks.herokuapp.com/find-Data', options)
+                    fetch('https://gdsc-gecg-30-days-of-gcp.herokuapp.com/find-Data', options)
                         .then(data => {
                             if (!data.ok) {
                                 if (data.status == 400) {
