@@ -122,8 +122,8 @@ body {
     left: 0;
     background-color: rgba(51, 51, 51, 0.6);
     z-index: 5;
-    opacity: 1;
-    visibility: visible;
+    opacity: 0;
+    visibility: hidden;
     text-align: center;
     transition: 0.3s ease-in-out;
 }
