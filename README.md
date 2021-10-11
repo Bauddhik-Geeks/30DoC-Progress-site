@@ -1,4 +1,4 @@
-# 30Days of Google cloud progress site 🎓 
+# 30DoC BIT Mesra 🎓 
 
 ![](https://img.shields.io/github/repo-size/Bauddhik-Geeks/Welcome-to-Bauddhik-Geeks)
 <img src="https://visitor-badge.laobi.icu/badge?page_id=Bauddhik-Geeks">
