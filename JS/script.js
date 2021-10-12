@@ -263,16 +263,18 @@ function paginationLoop(num1, num2, num3) {
     return [pageInsight, lastCountValue, num3];
 }
 
-
-
 var leadActive = document.querySelectorAll('.lead_stat');
+var leadShow = document.querySelectorAll('.lead_show');
 
 for (let i = 0; i < leadActive.length; i++) {
     leadActive[i].onclick = function() {
         let j = 0;
         while (j < leadActive.length) {
-            leadActive[j++].className = 'lead_stat';
+            leadActive[j].className = 'lead_stat';
+            leadShow[j].className = 'lead_show';
+            j++;
         }
         leadActive[i].className = 'lead_stat lead_active';
+        leadShow[i].className = 'lead_show lead_active';
     }
 }
