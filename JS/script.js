@@ -163,14 +163,12 @@ function ValidateEmail(mail) {
 var prevButton = document.getElementById('lead_prev');
 var nextButton = document.getElementById('lead_next');
 var leadRecCount = document.getElementById('lead_rec_num');
+var leadList = document.getElementsByClassName('lead_list')[0];
 
 const leaderBoard = ['Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3'];
-var leadList = document.getElementsByClassName('lead_list')[0];
-console.log(leadList.childElementCount);
 
 var pagination = 10;
 var paginationCount = 0;
-
 var buttonClick = 0;
 
 
@@ -188,30 +186,15 @@ prevButton.onclick = function() {
             paginationCount -= pagination;
         }
     }
-    //let pageShow = paginationCount;
-    //console.log('Pag Count : ' + paginationCount);
-    //console.log(pageShow);
-    //console.log('Pag Count : ' + paginationCount);
-    //console.log(leaderBoard.length);
-    let pageInsight;
+
     let countStart = 0;
-    let lastCountValue;
-    for (let i = paginationCount; i < pageShow; i++) {
-        if (i < leaderBoard.length) {
-            countStart = 1;
-            //console.log(leaderBoard[i]);
-            if (i == paginationCount) {
-                pageInsight = '<li>' + leaderBoard[i] + '<span class="lead_quest">' + '5' + '<span>' + '</li>';
-            } else {
-                pageInsight += '<li>' + leaderBoard[i] + '<span class="lead_quest">' + '5' + '<span>' + '</li>';
-            }
-            lastCountValue = i;
-        }
-    }
+
+    let funValue = paginationLoop(paginationCount, pageShow, countStart);
+    countStart = funValue[2];
 
     if (countStart == 1) {
-        leadList.innerHTML = pageInsight;
-        leadRecCount.innerHTML = (paginationCount + 1) + ' - ' + (lastCountValue + 1);
+        leadList.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (paginationCount + 1) + ' - ' + (funValue[1] + 1);
     }
     buttonClick = 0;
 }
@@ -220,7 +203,6 @@ nextButton.onclick = function() {
     let pageShow;
     if (buttonClick == 0) {
         pageShow = paginationCount + 10;
-        //console.log('Works');
         if (paginationCount < leaderBoard.length) {
             paginationCount += (pagination + 10);
         }
@@ -231,46 +213,46 @@ nextButton.onclick = function() {
         }
     }
 
-
-    //console.log('Page Show: ' + pageShow);
-    //console.log(leaderBoard.length);
-    let pageInsight;
     let countStart = 0;
-    let lastCountValue;
-    for (let i = pageShow; i < paginationCount; i++) {
-        if (i < leaderBoard.length) {
-            countStart = 1;
-            //console.log(leaderBoard[i]);
-            if (i == pageShow) {
-                pageInsight = '<li>' + leaderBoard[i] + '<span class="lead_quest">' + '5' + '<span>' + '</li>';
-            } else {
-                pageInsight += '<li>' + leaderBoard[i] + '<span class="lead_quest">' + '5' + '<span>' + '</li>';
-            }
-            lastCountValue = i;
-        }
-    }
+
+    let funValue = paginationLoop(pageShow, paginationCount, countStart);
+    countStart = funValue[2];
 
     if (countStart == 1) {
-        leadList.innerHTML = pageInsight;
-        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (lastCountValue + 1);
-        //console.log(paginationCount);
+        leadList.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
     }
     buttonClick = 1;
 }
 
 window.onload = function() {
+
     let pageShow = paginationCount;
     if (paginationCount < leaderBoard.length) {
         paginationCount += pagination;
     }
-    let pageInsight;
+
     let countStart = 0;
+
+    let funValue = paginationLoop(pageShow, paginationCount, countStart);
+    countStart = funValue[2];
+
+    if (countStart == 1) {
+        leadList.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+    }
+    buttonClick = 1;
+}
+
+function paginationLoop(num1, num2, num3) {
+
+    let pageInsight;
     let lastCountValue;
-    for (let i = pageShow; i < paginationCount; i++) {
+    for (let i = num1; i < num2; i++) {
+
         if (i < leaderBoard.length) {
-            countStart = 1;
-            //console.log(leaderBoard[i]);
-            if (i == pageShow) {
+            num3 = 1;
+            if (i == num1) {
                 pageInsight = '<li>' + leaderBoard[i] + '<span class="lead_quest">' + '5' + '<span>' + '</li>';
             } else {
                 pageInsight += '<li>' + leaderBoard[i] + '<span class="lead_quest">' + '5' + '<span>' + '</li>';
@@ -278,11 +260,19 @@ window.onload = function() {
             lastCountValue = i;
         }
     }
+    return [pageInsight, lastCountValue, num3];
+}
 
-    if (countStart == 1) {
-        leadList.innerHTML = pageInsight;
-        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (lastCountValue + 1);
-        //console.log(paginationCount);
+
+
+var leadActive = document.querySelectorAll('.lead_stat');
+
+for (let i = 0; i < leadActive.length; i++) {
+    leadActive[i].onclick = function() {
+        let j = 0;
+        while (j < leadActive.length) {
+            leadActive[j++].className = 'lead_stat';
+        }
+        leadActive[i].className = 'lead_stat lead_active';
     }
-    buttonClick = 1;
 }
