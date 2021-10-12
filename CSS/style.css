@@ -269,14 +269,32 @@ body {
     color: var(--primary-color);
 }
 
-.lead_show {
-    color: var(--color-1);
-}
-
 #lead_rec_num {
     position: absolute;
     right: 25px;
     top: 25px;
+    color: var(--color-1);
+}
+
+#lead_see_rec {
+    margin: 20px auto;
+}
+
+.lead_stat {
+    color: var(--color-1);
+    padding: 8px 10px;
+    background-color: #0e9c57;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    border-radius: 3px;
+}
+
+.lead_stat.lead_active {
+    color: var(--primary-color);
+}
+
+.lead_show {
+    color: var(--color-1);
 }
 
 .lead_list {
