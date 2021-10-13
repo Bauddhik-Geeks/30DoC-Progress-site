@@ -160,19 +160,23 @@ function ValidateEmail(mail) {
 
 /**** Leaderboard ****/
 
-var prevButton = document.getElementById('lead_prev');
-var nextButton = document.getElementById('lead_next');
+var prevButton1 = document.getElementsByClassName('lead_prev')[0];
+var prevButton2 = document.getElementsByClassName('lead_prev')[1];
+var nextButton1 = document.getElementsByClassName('lead_next')[0];
+var nextButton2 = document.getElementsByClassName('lead_next')[1];
 var leadRecCount = document.getElementById('lead_rec_num');
-var leadList = document.getElementsByClassName('lead_list')[0];
+var leadList1 = document.getElementsByClassName('lead_list')[0];
+var leadList2 = document.getElementsByClassName('lead_list')[1];
 
 const leaderBoard = ['Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3'];
-
+const leaderBoard2 = ['Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3'];
+leaderBoard2.reverse();
 var pagination = 10;
 var paginationCount = 0;
 var buttonClick = 0;
 
 
-prevButton.onclick = function() {
+prevButton1.onclick = function() {
     let pageShow;
     if (buttonClick == 1) {
         pageShow = paginationCount - 10;
@@ -193,13 +197,13 @@ prevButton.onclick = function() {
     countStart = funValue[2];
 
     if (countStart == 1) {
-        leadList.innerHTML = funValue[0];
+        leadList1.innerHTML = funValue[0];
         leadRecCount.innerHTML = (paginationCount + 1) + ' - ' + (funValue[1] + 1);
     }
     buttonClick = 0;
 }
 
-nextButton.onclick = function() {
+nextButton1.onclick = function() {
     let pageShow;
     if (buttonClick == 0) {
         pageShow = paginationCount + 10;
@@ -216,29 +220,11 @@ nextButton.onclick = function() {
     let countStart = 0;
 
     let funValue = paginationLoop(pageShow, paginationCount, countStart);
+    console.log(funValue);
     countStart = funValue[2];
 
     if (countStart == 1) {
-        leadList.innerHTML = funValue[0];
-        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
-    }
-    buttonClick = 1;
-}
-
-window.onload = function() {
-
-    let pageShow = paginationCount;
-    if (paginationCount < leaderBoard.length) {
-        paginationCount += pagination;
-    }
-
-    let countStart = 0;
-
-    let funValue = paginationLoop(pageShow, paginationCount, countStart);
-    countStart = funValue[2];
-
-    if (countStart == 1) {
-        leadList.innerHTML = funValue[0];
+        leadList1.innerHTML = funValue[0];
         leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
     }
     buttonClick = 1;
@@ -250,20 +236,146 @@ function paginationLoop(num1, num2, num3) {
     pageInsight = '';
     let lastCountValue;
     for (let i = num1; i < num2; i++) {
-
         if (i < leaderBoard.length) {
             num3 = 1;
-            /* if (i == num1) {
-                pageInsight = '<li><div>' + leaderBoard[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
-            } else {
-                pageInsight += '<li><div>' + leaderBoard[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
-            } */
             pageInsight += '<li><div>' + leaderBoard[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
             lastCountValue = i;
         }
     }
     return [pageInsight, lastCountValue, num3];
 }
+
+
+
+/*** Completed ***/
+
+var paginationCount2 = 0;
+var buttonClick2 = 0;
+
+
+prevButton2.onclick = function() {
+    let pageShow;
+    if (buttonClick2 == 1) {
+        pageShow = paginationCount2 - 10;
+        if (paginationCount2 > 0) {
+            paginationCount2 -= (pagination + 10);
+        }
+    } else {
+        pageShow = paginationCount2;
+        if (paginationCount2 > 0) {
+
+            paginationCount2 -= pagination;
+        }
+    }
+
+    let countStart = 0;
+
+    let funValue = paginationLoop2(paginationCount2, pageShow, countStart);
+    countStart = funValue[2];
+
+    if (countStart == 1) {
+        leadList2.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (paginationCount2 + 1) + ' - ' + (funValue[1] + 1);
+    }
+    buttonClick2 = 0;
+}
+
+nextButton2.onclick = function() {
+    let pageShow;
+    if (buttonClick2 == 0) {
+        pageShow = paginationCount2 + 10;
+        if (paginationCount2 < leaderBoard2.length) {
+            paginationCount2 += (pagination + 10);
+        }
+    } else {
+        pageShow = paginationCount2;
+        if (paginationCount2 < leaderBoard2.length) {
+            paginationCount2 += pagination;
+        }
+    }
+
+    let countStart = 0;
+
+    let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
+    countStart = funValue[2];
+
+    if (countStart == 1) {
+        leadList2.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+    }
+    buttonClick = 1;
+}
+
+/* window.onload = function() {
+
+    let pageShow = paginationCount2;
+    if (paginationCount2 < leaderBoard2.length) {
+        paginationCount2 += pagination;
+    }
+
+    let countStart = 0;
+
+    let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
+    countStart = funValue[2];
+
+    if (countStart == 1) {
+        leadList2.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+    }
+    buttonClick2 = 1;
+} */
+window.addEventListener('load', function() {
+
+    let pageShow = paginationCount;
+    if (paginationCount < leaderBoard.length) {
+        paginationCount += pagination;
+    }
+    let countStart = 0;
+
+    let funValue = paginationLoop(pageShow, paginationCount, countStart);
+    countStart = funValue[2];
+
+    if (countStart == 1) {
+        leadList1.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+    }
+    buttonClick = 1;
+}, false);
+
+window.addEventListener('load', function() {
+    let pageShow = paginationCount2;
+    if (paginationCount2 < leaderBoard2.length) {
+        paginationCount2 += pagination;
+    }
+
+    let countStart = 0;
+
+    let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
+    countStart = funValue[2];
+
+    if (countStart == 1) {
+        leadList2.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+    }
+    buttonClick2 = 1;
+}, false);
+
+function paginationLoop2(num1, num2, num3) {
+
+    let pageInsight;
+    pageInsight = '';
+    let lastCountValue;
+    for (let i = num1; i < num2; i++) {
+        if (i < leaderBoard2.length) {
+            num3 = 1;
+            pageInsight += '<li><div>' + leaderBoard2[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
+            lastCountValue = i;
+        }
+    }
+    return [pageInsight, lastCountValue, num3];
+}
+
+
 
 var leadActive = document.querySelectorAll('.lead_stat');
 var leadShow = document.querySelectorAll('.lead_show');

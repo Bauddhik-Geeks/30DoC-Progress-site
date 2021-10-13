@@ -82,7 +82,7 @@ body {
     text-align: center;
     margin-bottom: 15px;
     font-size: 1.5rem;
-    margin-left: 40px;
+    /* margin-left: 40px; */
 }
 
 #form-div div {
@@ -97,7 +97,7 @@ body {
     border: 0;
     outline: none;
     border-radius: 6px;
-    margin-left: 60px;
+    /* margin-left: 60px; */
 }
 
 #form-div input[type="submit"] {
@@ -348,16 +348,46 @@ body {
 }
 
 .lead_quest {
-    color: #0e9c57;
+    color: #e94234;
+    font-weight: 600;
+    font-size: 0.97rem;
 }
 
 .lead_button {
     outline: 0;
     border: 0;
-    padding: 4px 10px;
-    border-radius: 4px;
+    width: 50px;
+    height: 35px;
+    border-radius: 3px;
     cursor: pointer;
     margin: 0px 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-top-color: #4184f3;
+    border-left-color: #e94234;
+    border-bottom-color: #fabb04;
+    border-right-color: #0e9c57;
+    background-color: transparent;
+    color: var(--color-1);
+    font-weight: bold;
+    transition: 0.2s ease-in-out;
+}
+
+.lead_button:hover {
+    color: var(--primary-color);
+}
+
+.lead_button:hover:before {
+    animation: changeBorder 2s linear infinite;
+}
+
+@keyframes changeBorder {
+    0% {
+        transition: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .footer_bottom {
