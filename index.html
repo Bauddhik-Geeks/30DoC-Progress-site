@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GDSC-BIT,MESRA|Bauddhik-Geeks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="shortcut icon" href="Images/clubbirla.png" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -13,12 +16,27 @@
 </head>
 
 <body>
+
+    <div id="loader">
+        <div id="loading-bar-spinner" class="spinner">
+            <div class="spinner-icon"></div>
+        </div>
+    </div>
+
     <div class="main-partner">
         <div class='partner'>
             <a href="https://bauddhikgeeks.tech/"><img src="Images/transbg.png">Bauddhik Geeks</a>
         </div>
         <div class='partner'>
             <a href="https://gdsc.community.dev/birla-institute-of-technology-mesra-ranchi/" target='_blank'><img src="Images/clubbirla.png">GDSC-BIT, Mesra</a>
+        </div>
+    </div>
+
+    <div id="rocket-overlay">
+        <div id='rocket'>
+            <div id='rocket-part'>
+                <img src='Images/rocket.png' alt='rocket'>
+            </div>
         </div>
     </div>
 
@@ -93,19 +111,15 @@
                 </div>
                 <div id='lead_rec_num'>1 - 10</div>
                 <div id='lead_see_rec'>
-                    <div class='lead_stat lead_active' id="active_class_1">All Stat</div>
-                    <div class='lead_stat' id="active_class_2">Completed</div>
+                    <div class='lead_stat lead_active' id="active_class_1">All Stats</div>
+                    <!-- <div class='lead_stat' id="active_class_2">Completed</div> -->
                 </div>
                 <div class='lead_show' id="lead_show_1">
                     <ul class='lead_list'>
                         <!-- <li>
                             <div>Keval</div>
                             <div class='lead_quest'>5</div>
-                        </li>
-                        <li>Abhi</li>
-                        <li>Aditya</li>
-                        <li>Nitesh</li>
-                        <li>RHVS</li> -->
+                        </li>-->
                     </ul>
 
                     <div style='text-align:center'><button class='lead_button lead_prev'>&#60;&#60; </button> <button class='lead_button lead_next'>&#62;&#62; </button></div>
@@ -116,25 +130,13 @@
                         <!-- <li>
                             <div>Keval</div>
                             <div class='lead_quest'>5</div>
-                        </li>
-                        <li>Abhi</li>
-                        <li>Aditya</li>
-                        <li>Nitesh</li>
-                        <li>RHVS</li> -->
+                        </li>-->
                     </ul>
 
                     <div style='text-align:center'><button class='lead_button lead_prev'>&#60;&#60;</button> <button class='lead_button lead_next'> &#62;&#62; </button></div>
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <div id="rocket-overlay">
-        <div id='rocket'>
-            <div id='rocket-part'>
-                <img src='Images/rocket.png' alt='rocket'>
-            </div>
         </div>
     </div>
 

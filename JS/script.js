@@ -15,8 +15,7 @@ submitForm.onclick = function(e) {
     if (inputEmail.value == '') {
         alert('Please enter your email address');
     } else {
-        var emailCheck = ValidateEmail(inputEmail.value);
-        if (emailCheck == true) {
+        if (ValidateEmail(inputEmail.value) == true || validateForm(inputEmail.value) == true) {
             if (!rocket.classList.contains('rocketlaunch')) {
                 rocket.classList.add('rocketlaunch');
                 rocketOverlay.style.opacity = '1';
@@ -158,6 +157,14 @@ function ValidateEmail(mail) {
 }
 
 
+var standardEmail = /^(?!.+@(gmail|google|yahoo|outlook|hotmail|msn)\..+)(.+@.+\..+)$/;
+
+
+function validateForm(mail) {
+    var isValid = standardEmail.test(mail);
+    return isValid;
+}
+
 /**** Leaderboard ****/
 
 var prevButton1 = document.getElementsByClassName('lead_prev')[0];
@@ -168,143 +175,237 @@ var leadRecCount = document.getElementById('lead_rec_num');
 var leadList1 = document.getElementsByClassName('lead_list')[0];
 var leadList2 = document.getElementsByClassName('lead_list')[1];
 
-const leaderBoard = ['Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3'];
-const leaderBoard2 = ['Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3', 'Keval 1', 'Abhi 1', 'Aditya 1', 'Nitesh 1', 'RHVS 1', 'Keval 2', 'Abhi 2', 'Aditya 2', 'Nitesh 2', 'RHVS 2', 'Keval 3', 'Abhi 3', 'Aditya 3', 'Nitesh 3', 'RHVS 3'];
-leaderBoard2.reverse();
-var pagination = 10;
-var paginationCount = 0;
-var buttonClick = 0;
 
 
-prevButton1.onclick = function() {
-    let pageShow;
-    if (buttonClick == 1) {
-        pageShow = paginationCount - 10;
-        if (paginationCount > 0) {
-            paginationCount -= (pagination + 10);
+var leaderBoard;
+
+const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+};
+fetch('https://bit-bauddhik-geeks.herokuapp.com/getAll', options)
+    .then(data => {
+        if (!data.ok) {
+            throw Error(data.status);
         }
-    } else {
-        pageShow = paginationCount;
-        if (paginationCount > 0) {
+        return data.json();
+    }).then(update => {
 
-            paginationCount -= pagination;
+        document.getElementById('loader').style.opacity = '0';
+        document.getElementById('loader').style.visibility = 'hidden';
+        //console.log(update);
+        leaderBoard = update;
+
+        var pagination = 10;
+        var paginationCount = 0;
+        var buttonClick = 0;
+
+
+        prevButton1.onclick = function() {
+            let pageShow;
+            if (buttonClick == 1) {
+                pageShow = paginationCount - 10;
+                if (paginationCount > 0) {
+                    paginationCount -= (pagination + 10);
+                }
+            } else {
+                pageShow = paginationCount;
+                if (paginationCount > 0) {
+                    paginationCount -= pagination;
+                }
+            }
+
+            let countStart = 0;
+
+            let funValue = paginationLoop(paginationCount, pageShow, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList1.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (paginationCount + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick = 0;
         }
-    }
 
-    let countStart = 0;
+        nextButton1.onclick = function() {
+            let pageShow;
+            if (buttonClick == 0) {
+                pageShow = paginationCount + 10;
+                if (paginationCount < leaderBoard['data'].length) {
+                    paginationCount += (pagination + 10);
+                }
+            } else {
+                pageShow = paginationCount;
+                if (paginationCount < leaderBoard['data'].length) {
+                    paginationCount += pagination;
+                }
+            }
 
-    let funValue = paginationLoop(paginationCount, pageShow, countStart);
-    countStart = funValue[2];
+            let countStart = 0;
 
-    if (countStart == 1) {
-        leadList1.innerHTML = funValue[0];
-        leadRecCount.innerHTML = (paginationCount + 1) + ' - ' + (funValue[1] + 1);
-    }
-    buttonClick = 0;
-}
+            let funValue = paginationLoop(pageShow, paginationCount, countStart);
+            countStart = funValue[2];
 
-nextButton1.onclick = function() {
-    let pageShow;
-    if (buttonClick == 0) {
-        pageShow = paginationCount + 10;
-        if (paginationCount < leaderBoard.length) {
-            paginationCount += (pagination + 10);
+            if (countStart == 1) {
+                leadList1.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick = 1;
         }
-    } else {
-        pageShow = paginationCount;
-        if (paginationCount < leaderBoard.length) {
-            paginationCount += pagination;
+
+        function paginationLoop(num1, num2, num3) {
+
+            let pageInsight;
+            pageInsight = '';
+            let lastCountValue;
+            for (let i = num1; i < num2; i++) {
+                if (i < leaderBoard['data'].length) {
+                    num3 = 1;
+                    pageInsight += '<li><div>' + leaderBoard['data'][i]['name'] + '</div><div class="lead_quest">' + leaderBoard['data'][i]['totalQuest'] + ' Quest Completed 🎉🎊' + '</div>' + '</li>';
+                    lastCountValue = i;
+                }
+            }
+            return [pageInsight, lastCountValue, num3];
         }
-    }
 
-    let countStart = 0;
+        var trigger1 = 0;
 
-    let funValue = paginationLoop(pageShow, paginationCount, countStart);
-    console.log(funValue);
-    countStart = funValue[2];
+        if (trigger1 == 0) {
+            let pageShow = paginationCount;
+            if (paginationCount < leaderBoard['data'].length) {
+                paginationCount += pagination;
+            }
+            let countStart = 0;
 
-    if (countStart == 1) {
-        leadList1.innerHTML = funValue[0];
-        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
-    }
-    buttonClick = 1;
-}
+            let funValue = paginationLoop(pageShow, paginationCount, countStart);
+            countStart = funValue[2];
 
-function paginationLoop(num1, num2, num3) {
+            if (countStart == 1) {
+                leadList1.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick = 1;
 
-    let pageInsight;
-    pageInsight = '';
-    let lastCountValue;
-    for (let i = num1; i < num2; i++) {
-        if (i < leaderBoard.length) {
-            num3 = 1;
-            pageInsight += '<li><div>' + leaderBoard[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
-            lastCountValue = i;
+            trigger1 = 1;
         }
-    }
-    return [pageInsight, lastCountValue, num3];
-}
 
-
-
-/*** Completed ***/
-
-var paginationCount2 = 0;
-var buttonClick2 = 0;
-
-
-prevButton2.onclick = function() {
-    let pageShow;
-    if (buttonClick2 == 1) {
-        pageShow = paginationCount2 - 10;
-        if (paginationCount2 > 0) {
-            paginationCount2 -= (pagination + 10);
+        var leaderBoard2 = [];
+        var arrayCheck = 0;
+        for (var i in leaderBoard['data']) {
+            if (leaderBoard['data'][i]['totalQuest'] == 12) {
+                leaderBoard2[arrayCheck] = leaderBoard['data'][i]['name'];
+                arrayCheck++;
+            }
         }
-    } else {
-        pageShow = paginationCount2;
-        if (paginationCount2 > 0) {
 
-            paginationCount2 -= pagination;
+        /*** Completed ***/
+        var paginationCount2 = 0;
+        var buttonClick2 = 0;
+
+        //console.log(leaderBoard2);
+
+        prevButton2.onclick = function() {
+            let pageShow;
+            if (buttonClick2 == 1) {
+                pageShow = paginationCount2 - 10;
+                if (paginationCount2 > 0) {
+                    paginationCount2 -= (pagination + 10);
+                }
+            } else {
+                pageShow = paginationCount2;
+                if (paginationCount2 > 0) {
+                    paginationCount2 -= pagination;
+                }
+            }
+
+            let countStart = 0;
+
+            let funValue = paginationLoop2(paginationCount2, pageShow, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList2.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (paginationCount2 + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick2 = 0;
         }
-    }
 
-    let countStart = 0;
+        nextButton2.onclick = function() {
+            let pageShow;
+            if (buttonClick2 == 0) {
+                pageShow = paginationCount2 + 10;
+                if (paginationCount2 < leaderBoard2.length) {
+                    paginationCount2 += (pagination + 10);
+                }
+            } else {
+                pageShow = paginationCount2;
+                if (paginationCount2 < leaderBoard2.length) {
+                    paginationCount2 += pagination;
+                }
+            }
 
-    let funValue = paginationLoop2(paginationCount2, pageShow, countStart);
-    countStart = funValue[2];
+            let countStart = 0;
 
-    if (countStart == 1) {
-        leadList2.innerHTML = funValue[0];
-        leadRecCount.innerHTML = (paginationCount2 + 1) + ' - ' + (funValue[1] + 1);
-    }
-    buttonClick2 = 0;
-}
+            let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
+            countStart = funValue[2];
 
-nextButton2.onclick = function() {
-    let pageShow;
-    if (buttonClick2 == 0) {
-        pageShow = paginationCount2 + 10;
-        if (paginationCount2 < leaderBoard2.length) {
-            paginationCount2 += (pagination + 10);
+            if (countStart == 1) {
+                leadList2.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick2 = 1;
         }
-    } else {
-        pageShow = paginationCount2;
-        if (paginationCount2 < leaderBoard2.length) {
-            paginationCount2 += pagination;
+
+        var trigger2 = 0;
+
+        if (trigger2 == 0) {
+            let pageShow = paginationCount2;
+            if (paginationCount2 < leaderBoard2.length) {
+                paginationCount2 += pagination;
+            }
+
+            let countStart = 0;
+
+            let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList2.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick2 = 1;
+            trigger2 = 1;
         }
-    }
 
-    let countStart = 0;
+        window.addEventListener('load', function() {
 
-    let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
-    countStart = funValue[2];
+        }, false);
 
-    if (countStart == 1) {
-        leadList2.innerHTML = funValue[0];
-        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
-    }
-    buttonClick = 1;
-}
+        function paginationLoop2(num1, num2, num3) {
+
+            let pageInsight;
+            pageInsight = '';
+            let lastCountValue;
+            for (let i = num1; i < num2; i++) {
+                if (i < leaderBoard2.length) {
+                    num3 = 1;
+                    pageInsight += '<li><div>' + leaderBoard2[i] + '</div><div class="lead_quest">' + '12 Quest Completed 🎉🎊' + '</div>' + '</li>';
+                    lastCountValue = i;
+                }
+            }
+            return [pageInsight, lastCountValue, num3];
+        }
+
+    }).catch(e => {
+        console.log(e);
+    });
+
+
+
+
+
 
 /* window.onload = function() {
 
@@ -324,56 +425,9 @@ nextButton2.onclick = function() {
     }
     buttonClick2 = 1;
 } */
-window.addEventListener('load', function() {
 
-    let pageShow = paginationCount;
-    if (paginationCount < leaderBoard.length) {
-        paginationCount += pagination;
-    }
-    let countStart = 0;
 
-    let funValue = paginationLoop(pageShow, paginationCount, countStart);
-    countStart = funValue[2];
 
-    if (countStart == 1) {
-        leadList1.innerHTML = funValue[0];
-        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
-    }
-    buttonClick = 1;
-}, false);
-
-window.addEventListener('load', function() {
-    let pageShow = paginationCount2;
-    if (paginationCount2 < leaderBoard2.length) {
-        paginationCount2 += pagination;
-    }
-
-    let countStart = 0;
-
-    let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
-    countStart = funValue[2];
-
-    if (countStart == 1) {
-        leadList2.innerHTML = funValue[0];
-        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
-    }
-    buttonClick2 = 1;
-}, false);
-
-function paginationLoop2(num1, num2, num3) {
-
-    let pageInsight;
-    pageInsight = '';
-    let lastCountValue;
-    for (let i = num1; i < num2; i++) {
-        if (i < leaderBoard2.length) {
-            num3 = 1;
-            pageInsight += '<li><div>' + leaderBoard2[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
-            lastCountValue = i;
-        }
-    }
-    return [pageInsight, lastCountValue, num3];
-}
 
 
 
