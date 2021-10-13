@@ -247,16 +247,18 @@ window.onload = function() {
 function paginationLoop(num1, num2, num3) {
 
     let pageInsight;
+    pageInsight = '';
     let lastCountValue;
     for (let i = num1; i < num2; i++) {
 
         if (i < leaderBoard.length) {
             num3 = 1;
-            if (i == num1) {
-                pageInsight = '<li>' + leaderBoard[i] + '<span class="lead_quest">' + '5' + '<span>' + '</li>';
+            /* if (i == num1) {
+                pageInsight = '<li><div>' + leaderBoard[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
             } else {
-                pageInsight += '<li>' + leaderBoard[i] + '<span class="lead_quest">' + '5' + '<span>' + '</li>';
-            }
+                pageInsight += '<li><div>' + leaderBoard[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
+            } */
+            pageInsight += '<li><div>' + leaderBoard[i] + '</div><div class="lead_quest">' + '5 Quest Completed 🎉🎊' + '</div>' + '</li>';
             lastCountValue = i;
         }
     }
@@ -266,7 +268,7 @@ function paginationLoop(num1, num2, num3) {
 var leadActive = document.querySelectorAll('.lead_stat');
 var leadShow = document.querySelectorAll('.lead_show');
 
-for (let i = 0; i < leadActive.length; i++) {
+/* for (let i = 0; i < leadActive.length; i++) {
     leadActive[i].onclick = function() {
         let j = 0;
         while (j < leadActive.length) {
@@ -277,4 +279,20 @@ for (let i = 0; i < leadActive.length; i++) {
         leadActive[i].className = 'lead_stat lead_active';
         leadShow[i].className = 'lead_show lead_active';
     }
-}
+} */
+
+$("#active_class_1").click(function() {
+    $("#lead_show_2").hide();
+    $("#lead_show_1").fadeIn();
+    $('#active_class_1').addClass('lead_active');
+    $('#active_class_2').removeClass('lead_active');
+    /* $(".lead_show").show(); */
+});
+
+$("#active_class_2").click(function() {
+    $("#lead_show_1").hide();
+    $("#lead_show_2").fadeIn();
+    $('#active_class_2').addClass('lead_active');
+    $('#active_class_1').removeClass('lead_active');
+    /* $(".lead_show").show(); */
+});
