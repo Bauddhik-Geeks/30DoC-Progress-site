@@ -1,4 +1,4 @@
-# 30DoC BIT Mesra 🎓 
+# 30 Days of Google Cloud Progress Report site 🎓 
 
 ![](https://img.shields.io/github/repo-size/Bauddhik-Geeks/Welcome-to-Bauddhik-Geeks)
 <img src="https://visitor-badge.laobi.icu/badge?page_id=Bauddhik-Geeks">
@@ -11,6 +11,12 @@
 </p>
 
 **Website for checking Progress Report Site For 30 days of google cloud by just one click**
+<p>This website is been used by many GDSC Groups accross India 👇</p>
+<h3>GDSC BIT , MESRA : https://30-do-c-bit-mesra.vercel.app/</h3>
+<h3>GDSC GEC , GANDHINAGAR : https://30doc-gecg.bauddhikgeeks.tech/</h3>
+<h3>GDSC GEC , RAJKOT : https://30doc-gecr.bauddhikgeeks.tech/</h3>
+<h3>GDSC LNCT , BHOPAL : https://30doc-lnct.bauddhikgeeks.tech/</h3>
+
 
 ## Snapshot 💻
 
