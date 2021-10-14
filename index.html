@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="notranslate">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale"> 
     <title>GDSC-GEC,Rajkot|Bauddhik-Geeks</title>
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="shortcut icon" href="Images/clubbirla.png" type="image/x-icon">
@@ -14,6 +14,19 @@
 </head>
 
 <body>
+    <div id="loader">
+        <div id="loading-bar-spinner" class="spinner">
+            <div class="spinner-icon"></div>
+        </div>
+    </div>
+
+     <div id="rocket-overlay">
+        <div id='rocket'>
+            <div id='rocket-part'>
+                <img src='Images/rocket.png' alt='rocket'>
+            </div>
+        </div>
+    </div> 
     <div class="main-partner">
         <div class='partner'>
             <a href="https://bauddhikgeeks.tech/"><img src="Images/transbg.png">Bauddhik Geeks</a>
@@ -87,13 +100,36 @@
                 </div>
 
             </div>
-        </div>
-    </div>
+            <div class='leaderboard'>
+                <div class='lead_heading'>
+                    Leaderboard
+                </div>
+                <div id='lead_rec_num'>1 - 10</div>
+                <div id='lead_see_rec'>
+                    <div class='lead_stat lead_active' id="active_class_1">All Stats</div>
+                    <!-- <div class='lead_stat' id="active_class_2">Completed</div> -->
+                </div>
+                <div class='lead_show' id="lead_show_1">
+                    <ul class='lead_list'>
+                        <!-- <li>
+                            <div>Keval</div>
+                            <div class='lead_quest'>5</div>
+                        </li>-->
+                    </ul>
 
-    <div id="rocket-overlay">
-        <div id='rocket'>
-            <div id='rocket-part'>
-                <img src='Images/rocket.png' alt='rocket'>
+                    <div style='text-align:center'><button class='lead_button lead_prev'>&#60;&#60; </button> <button class='lead_button lead_next'>&#62;&#62; </button></div>
+                </div>
+
+                <div class='lead_show' id="lead_show_2">
+                    <ul class='lead_list'>
+                        <!-- <li>
+                            <div>Keval</div>
+                            <div class='lead_quest'>5</div>
+                        </li>-->
+                    </ul>
+
+                    <div style='text-align:center'><button class='lead_button lead_prev'>&#60;&#60;</button> <button class='lead_button lead_next'> &#62;&#62; </button></div>
+                </div>
             </div>
         </div>
     </div>

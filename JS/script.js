@@ -158,3 +158,299 @@ function ValidateEmail(mail) {
     }
     return (false);
 }
+
+var prevButton1 = document.getElementsByClassName('lead_prev')[0];
+var prevButton2 = document.getElementsByClassName('lead_prev')[1];
+var nextButton1 = document.getElementsByClassName('lead_next')[0];
+var nextButton2 = document.getElementsByClassName('lead_next')[1];
+var leadRecCount = document.getElementById('lead_rec_num');
+var leadList1 = document.getElementsByClassName('lead_list')[0];
+var leadList2 = document.getElementsByClassName('lead_list')[1];
+
+
+
+var leaderBoard;
+
+const options = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+};
+fetch('https://gecrajkot.herokuapp.com//getAll', options)
+    .then(data => {
+        if (!data.ok) {
+            throw Error(data.status);
+        }
+        return data.json();
+    }).then(update => {
+
+        document.getElementById('loader').style.opacity = '0';
+        document.getElementById('loader').style.visibility = 'hidden';
+        //console.log(update);
+        leaderBoard = update;
+
+        var pagination = 10;
+        var paginationCount = 0;
+        var buttonClick = 0;
+
+
+        prevButton1.onclick = function() {
+            let pageShow;
+            if (buttonClick == 1) {
+                pageShow = paginationCount - 10;
+                if (paginationCount > 0) {
+                    paginationCount -= (pagination + 10);
+                }
+            } else {
+                pageShow = paginationCount;
+                if (paginationCount > 0) {
+                    paginationCount -= pagination;
+                }
+            }
+
+            let countStart = 0;
+
+            let funValue = paginationLoop(paginationCount, pageShow, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList1.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (paginationCount + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick = 0;
+        }
+
+        nextButton1.onclick = function() {
+            let pageShow;
+            if (buttonClick == 0) {
+                pageShow = paginationCount + 10;
+                if (paginationCount < leaderBoard['data'].length) {
+                    paginationCount += (pagination + 10);
+                }
+            } else {
+                pageShow = paginationCount;
+                if (paginationCount < leaderBoard['data'].length) {
+                    paginationCount += pagination;
+                }
+            }
+
+            let countStart = 0;
+
+            let funValue = paginationLoop(pageShow, paginationCount, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList1.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick = 1;
+        }
+
+        function paginationLoop(num1, num2, num3) {
+
+            let pageInsight;
+            pageInsight = '';
+            let lastCountValue;
+            for (let i = num1; i < num2; i++) {
+                if (i < leaderBoard['data'].length) {
+                    num3 = 1;
+                    pageInsight += '<li><div>' + leaderBoard['data'][i]['name'] + '</div><div class="lead_quest">' + leaderBoard['data'][i]['totalQuest'] + ' Quest Completed 🎉🎊' + '</div>' + '</li>';
+                    lastCountValue = i;
+                }
+            }
+            return [pageInsight, lastCountValue, num3];
+        }
+
+        var trigger1 = 0;
+
+        if (trigger1 == 0) {
+            let pageShow = paginationCount;
+            if (paginationCount < leaderBoard['data'].length) {
+                paginationCount += pagination;
+            }
+            let countStart = 0;
+
+            let funValue = paginationLoop(pageShow, paginationCount, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList1.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick = 1;
+
+            trigger1 = 1;
+        }
+
+        var leaderBoard2 = [];
+        var arrayCheck = 0;
+        for (var i in leaderBoard['data']) {
+            if (leaderBoard['data'][i]['totalQuest'] == 12) {
+                leaderBoard2[arrayCheck] = leaderBoard['data'][i]['name'];
+                arrayCheck++;
+            }
+        }
+
+        /*** Completed ***/
+        var paginationCount2 = 0;
+        var buttonClick2 = 0;
+
+        //console.log(leaderBoard2);
+
+        prevButton2.onclick = function() {
+            let pageShow;
+            if (buttonClick2 == 1) {
+                pageShow = paginationCount2 - 10;
+                if (paginationCount2 > 0) {
+                    paginationCount2 -= (pagination + 10);
+                }
+            } else {
+                pageShow = paginationCount2;
+                if (paginationCount2 > 0) {
+                    paginationCount2 -= pagination;
+                }
+            }
+
+            let countStart = 0;
+
+            let funValue = paginationLoop2(paginationCount2, pageShow, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList2.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (paginationCount2 + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick2 = 0;
+        }
+
+        nextButton2.onclick = function() {
+            let pageShow;
+            if (buttonClick2 == 0) {
+                pageShow = paginationCount2 + 10;
+                if (paginationCount2 < leaderBoard2.length) {
+                    paginationCount2 += (pagination + 10);
+                }
+            } else {
+                pageShow = paginationCount2;
+                if (paginationCount2 < leaderBoard2.length) {
+                    paginationCount2 += pagination;
+                }
+            }
+
+            let countStart = 0;
+
+            let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList2.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick2 = 1;
+        }
+
+        var trigger2 = 0;
+
+        if (trigger2 == 0) {
+            let pageShow = paginationCount2;
+            if (paginationCount2 < leaderBoard2.length) {
+                paginationCount2 += pagination;
+            }
+
+            let countStart = 0;
+
+            let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
+            countStart = funValue[2];
+
+            if (countStart == 1) {
+                leadList2.innerHTML = funValue[0];
+                leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+            }
+            buttonClick2 = 1;
+            trigger2 = 1;
+        }
+
+        window.addEventListener('load', function() {
+
+        }, false);
+
+        function paginationLoop2(num1, num2, num3) {
+
+            let pageInsight;
+            pageInsight = '';
+            let lastCountValue;
+            for (let i = num1; i < num2; i++) {
+                if (i < leaderBoard2.length) {
+                    num3 = 1;
+                    pageInsight += '<li><div>' + leaderBoard2[i] + '</div><div class="lead_quest">' + '12 Quest Completed 🎉🎊' + '</div>' + '</li>';
+                    lastCountValue = i;
+                }
+            }
+            return [pageInsight, lastCountValue, num3];
+        }
+
+    }).catch(e => {
+        console.log(e);
+    });
+
+
+
+
+
+
+/* window.onload = function() {
+
+    let pageShow = paginationCount2;
+    if (paginationCount2 < leaderBoard2.length) {
+        paginationCount2 += pagination;
+    }
+
+    let countStart = 0;
+
+    let funValue = paginationLoop2(pageShow, paginationCount2, countStart);
+    countStart = funValue[2];
+
+    if (countStart == 1) {
+        leadList2.innerHTML = funValue[0];
+        leadRecCount.innerHTML = (pageShow + 1) + ' - ' + (funValue[1] + 1);
+    }
+    buttonClick2 = 1;
+} */
+
+
+
+
+
+
+var leadActive = document.querySelectorAll('.lead_stat');
+var leadShow = document.querySelectorAll('.lead_show');
+
+/* for (let i = 0; i < leadActive.length; i++) {
+    leadActive[i].onclick = function() {
+        let j = 0;
+        while (j < leadActive.length) {
+            leadActive[j].className = 'lead_stat';
+            leadShow[j].className = 'lead_show';
+            j++;
+        }
+        leadActive[i].className = 'lead_stat lead_active';
+        leadShow[i].className = 'lead_show lead_active';
+    }
+} */
+
+$("#active_class_1").click(function() {
+    $("#lead_show_2").hide();
+    $("#lead_show_1").fadeIn();
+    $('#active_class_1').addClass('lead_active');
+    $('#active_class_2').removeClass('lead_active');
+    /* $(".lead_show").show(); */
+});
+
+$("#active_class_2").click(function() {
+    $("#lead_show_1").hide();
+    $("#lead_show_2").fadeIn();
+    $('#active_class_2').addClass('lead_active');
+    $('#active_class_1').removeClass('lead_active');
+    /* $(".lead_show").show(); */
+});
