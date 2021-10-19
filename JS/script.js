@@ -35,7 +35,7 @@ submitForm.onclick = function(e) {
                             email: inputEmail.value
                         }),
                     };
-                    fetch('https://gdsc-gecg-30-days-of-gcp.herokuapp.com/find-Data', options)
+                    fetch('https://gdsc-kssem.herokuapp.com/find-Data', options)
                         .then(data => {
                             if (!data.ok) {
                                 if (data.status == 400) {
@@ -177,7 +177,7 @@ const options = {
         'Content-Type': 'application/json',
     },
 };
-fetch('https://gdsc-gecg-30-days-of-gcp.herokuapp.com/getAll', options)
+fetch('https://gdsc-kssem.herokuapp.com/getAll', options)
     .then(data => {
         if (!data.ok) {
             throw Error(data.status);
